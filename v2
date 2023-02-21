@@ -1,0 +1,28 @@
+from microbit import *
+import random
+
+bird_x = 0
+bird_y = 1
+
+while True:
+
+    
+    if button_a.was_pressed():
+        bird_y -= 1
+    else:
+        bird_y += 1
+
+    if bird_y == -1:
+        bird_y = 0
+
+    if bird_y == 5:
+        print("you lose")
+        break
+
+    sleep(450)
+    display.clear()
+    display.set_pixel(bird_x, bird_y, 9)
+
+
+    
+
