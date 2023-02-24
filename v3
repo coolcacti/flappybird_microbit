@@ -1,0 +1,53 @@
+from microbit import *
+
+bird_x = 1
+bird_y = 1
+
+obs_x = 4
+
+
+frame_count = 0
+frame_count2 = 0
+
+score = 0
+
+
+while True:
+    frame_count += 1
+    frame_count2 += 1
+
+    if frame_count == 10:
+        bird_y += 1
+        frame_count = 0
+
+    if button_a.was_pressed():
+        bird_y -= 1
+    
+    if bird_y == -1:
+        bird_y = 0
+
+    if bird_x == obs_x and bird_y in [0,3,4]:
+        display.scroll("GAME OVER", delay=17, loop=False, wait=True)
+        display.scroll(score, delay=17, loop=False, wait=False)
+        break
+
+    if bird_y == 5:
+        display.scroll("GAME OVER", delay=17, loop=False, wait=True)
+        display.scroll(score, delay=17, loop=False, wait=False)
+        break
+
+    if frame_count2 == 10:
+        obs_x -= 1
+        frame_count2 = 0
+
+    if obs_x == -1:
+        obs_x = 4
+        score += 1
+        
+    sleep(33)
+    display.clear()
+    display.set_pixel(bird_x, bird_y, 9)
+
+    display.set_pixel(obs_x, 0, 9)
+    display.set_pixel(obs_x, 3, 9)
+    display.set_pixel(obs_x, 4, 9)
